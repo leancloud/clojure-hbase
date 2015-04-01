@@ -5,8 +5,7 @@
   (:import [org.apache.hadoop.hbase HBaseConfiguration HConstants
             HTableDescriptor HColumnDescriptor]
            [org.apache.hadoop.hbase.client HBaseAdmin]
-           [org.apache.hadoop.hbase.util Bytes]
-           [org.apache.hadoop.hbase.io.hfile Compression]))
+           [org.apache.hadoop.hbase.util Bytes]))
 
 (def ^{:tag HBaseConfiguration :dynamic true} *admin-config*
   (atom nil))
