@@ -505,3 +505,40 @@
                                 :map-value #(Bytes/toString %)
                                 :map-timestamp identity)))))))
 
+(deftest test-reverse-scan
+  (with-create-table [table-name (create-table (rand-table) "col")]
+    (with-table [htable (table table-name)]
+      (put htable 1 :values [:col [:a "1" :b "bar1"]])
+      (put htable 2 :values [:col [:a "2" :b "bar2"]])
+      (put htable 3 :values [:col [:c "3"]])
+      (put htable 4 :values [:col [:d "4"]])
+      (is (= [{:col {:a "1" :b "bar1"}}
+              {:col {:a "2" :b "bar2"}}
+              {:col {:c "3"}}
+              {:col {:d "4"}}]
+             (with-scanner [res (scan htable)]
+               (->> (.iterator res)
+                    iterator-seq
+                    (map result->map)
+                    doall))))
+      (is (= [{:col {:d "4"}}
+              {:col {:c "3"}}
+              {:col {:a "2" :b "bar2"}}
+              {:col {:a "1" :b "bar1"}}]
+             (with-scanner [res (scan htable :reversed true)]
+               (->> (.iterator res)
+                    iterator-seq
+                    (map result->map)
+                    doall))))
+      ;; stop row is exclusive
+      (is (= [{:col {:d "4"}}
+              {:col {:c "3"}}
+              {:col {:a "2" :b "bar2"}}]
+             (with-scanner [res (scan htable
+                                      :start-row 4
+                                      :stop-row 1
+                                      :reversed true)]
+               (->> (.iterator res)
+                    iterator-seq
+                    (map result->map)
+                    doall)))))))

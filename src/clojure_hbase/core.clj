@@ -676,6 +676,7 @@
    :time-stamp   1    ;; :time-stamp time
    :start-row    1    ;; :start-row row
    :stop-row     1    ;; :stop-row row
+   :reversed     1
    :use-existing 1})  ;; :use-existing <some Get you've made>
 
 (defn- make-scan
@@ -713,6 +714,7 @@
           :max-versions (.setMaxVersions scan-op (second spec))
           :time-range   (apply #(.setTimeRange scan-op %1 %2) (second spec))
           :time-stamp   (.setTimeStamp scan-op (second spec))
+          :reversed     (.setReversed scan-op (second spec))
           :start-row    (.setStartRow scan-op (to-bytes (second spec)))
           :stop-row     (.setStopRow scan-op (to-bytes (second spec)))))
     scan-op))
