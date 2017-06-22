@@ -86,8 +86,11 @@
 ;;
 
 (defn add-column-family
-  [table-name ^HColumnDescriptor column-descriptor]
-  (.addColumn (hbase-admin) (to-bytes table-name) column-descriptor))
+  [table-name column]
+  (condp instance? column
+    HColumnDescriptor
+    (.addColumn (hbase-admin) table-name column)
+    (.addColumn (hbase-admin) table-name (column-descriptor column))))
 
 (defn hbase-available?
   []
@@ -107,7 +110,7 @@
 
 (defn delete-column-family
   [table-name column-name]
-  (.deleteColumn (hbase-admin) (to-bytes table-name) (to-bytes column-name)))
+  (.deleteColumn (hbase-admin) table-name column-name))
 
 (defn delete-table
   [table-name]
