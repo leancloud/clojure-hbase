@@ -29,6 +29,8 @@ of HBase.
 
 ## Usage
 
+[![Clojars Project](https://img.shields.io/clojars/v/cn.leancloud/clojure-hbase.svg)](https://clojars.org/cn.leancloud/clojure-hbase)
+
 HBase supports four main operations: `Get`, `Put`, `Delete`, and `Scan`. The API is 
 based around creating objects of the same name, and then submitting those to 
 the HTable representing a given table in the database. Clojure-HBase is 
