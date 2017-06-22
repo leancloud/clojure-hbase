@@ -1,13 +1,13 @@
-(defproject clojure-hbase "0.98.6-cdh5.3.6"
+(defproject clojure-hbase "1.2.0-cdh5.7.4"
   :description "A convenient Clojure interface to HBase."
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.apache.hbase/hbase-common "0.98.6-cdh5.3.6"]
-                 [org.apache.hbase/hbase-client "0.98.6-cdh5.3.6"]
-                 [org.apache.hbase/hbase-server "0.98.6-cdh5.3.6"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.apache.hbase/hbase-common "1.2.0-cdh5.7.4"]
+                 [org.apache.hbase/hbase-client "1.2.0-cdh5.7.4"]
+                 [org.apache.hbase/hbase-server "1.2.0-cdh5.7.4"]
                  [log4j/log4j "1.2.16" :exclusions [javax.mail/mail
                                                     javax.jms/jms
                                                     com.sun.jdmk/jmxtools
                                                     com.sun.jmx/jmxri]]
-                 [org.clojure/tools.logging "0.2.3"]
-                 [org.apache.hadoop/hadoop-test "2.5.0-mr1-cdh5.3.6" :scope "test"]]
-  :repositories [["cloudera" "https://repository.cloudera.com/content/groups/public/"]])
+                 [org.clojure/tools.logging "0.2.3"]]
+  :repositories [["cloudera" "https://repository.cloudera.com/content/groups/public/"]]
+  :profiles {:dev {:dependencies [[org.apache.hbase/hbase-testing-util "1.2.0-cdh5.7.4"]]}})
