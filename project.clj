@@ -1,4 +1,4 @@
-(defproject cn.leancloud/clojure-hbase "1.2.0-cdh5.7.4"
+(defproject cn.leancloud/clojure-hbase "1.2.0-cdh5.7.4-1"
   :description "A convenient Clojure interface to HBase."
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.apache.hbase/hbase-common "1.2.0-cdh5.7.4"]
