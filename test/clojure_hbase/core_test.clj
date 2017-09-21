@@ -131,6 +131,16 @@
                  (result->vector)))
           "Execute Delete and Get object"))))
 
+(deftest test-put-with-ttl
+  (with-create-table [table-name (create-table (rand-table) "col")]
+    (with-table [htable (table table-name)]
+      (execute htable (put* "row01" :ttl 100 :value [:col :qual "val"]))
+      (Thread/sleep 100)
+      (is (.isEmpty (-> htable
+                        (execute (get* "row01" :column ["col" "qual"]))
+                        first))
+          "Execute Put with ttl"))))
+
 (deftest test-get-put-delete
   (with-create-table [table-name (create-table (rand-table) "col")]
     (with-table [htable (table table-name)]

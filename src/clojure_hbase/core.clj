@@ -491,7 +491,8 @@
           :value          (apply put-add put-op (second spec))
           :values         (handle-put-values put-op (second spec))
           :with-timestamp (handle-put-with-ts put-op spec)
-          :write-to-WAL   (.setWriteToWAL put-op (second spec))))
+          :write-to-WAL   (.setWriteToWAL put-op (second spec))
+          :ttl            (.setTTL put-op (second spec))))
     put-op))
 
 (defn put
