@@ -728,3 +728,9 @@
   (let [s (apply scan* args)]
     (io!
      (scanner table s))))
+
+(defn increment-column-value
+  ([^HTableInterface table row family qualifier amount]
+   (increment-column-value table row family qualifier amount true))
+  ([^HTableInterface table row family qualifier amount write-to-wal?]
+   (.incrementColumnValue table (to-bytes row) (to-bytes family) (to-bytes qualifier) amount write-to-wal?)))
